@@ -53,8 +53,9 @@ nvm install node
 1. start server with `node server/index_service.js` (for service) or `node server/index_db.js` (for database)
 1. verify app up and running at url `http://[Public IPv4 DNS]:4002/:id` (for id values 1,000-10,001,000).
 NOTE: must use `http`, not `https`, or will return error
-1. to run stress test locally, create a free account on `newrelic.com`, and [install New Relic for Node](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent/) by installing New Relic dependency, downloading the newrelic.js config file in root, and requiring it in the server
-1. to run stress test in the cloud, install Artillery with `npm install -g artillery@1.6`, generate the test ids csv file with `node stressTest/writeTestIds.js`, and using `artillery run stressTest/reqTest.yml`
+1. to run stress test locally, install New Relic: create a free account on `newrelic.com`, and [install New Relic for Node](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent/) by installing New Relic dependency, downloading the newrelic.js config file in root, and requiring it in the server
+1. to run stress test locally by installing Artillery with `npm install -g artillery@1.6`, generate the test ids csv file with `node stressTest/writeTestIds.js`, and using `artillery run stressTest/reqTest.yml`
+1. to run stress test in the cloud, [install Loader.io](https://loader.io/) by signing up for a free account, adding a token to root, and running a test.
 1. to stop instance, go to instance page and click Instance State > Stop Instance.
 
 ## Setup with Proxy
