@@ -1,5 +1,5 @@
 {
-  "name": "FEC-Blitva-Photos",
+  "name": "Amazon-Photos-Service",
   "version": "",
   "description": "",
   "author": "",
@@ -8,8 +8,8 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "couch": "node populateCouch.js",
-    "pg": "node populatePg.js",
+    "couch": "node seeding/couchPopulate.js",
+    "pg": "node seeding/pgPopulate.js",
     "start": "node ./server/index.js",
     "build": "webpack --mode=production",
     "react-dev": "webpack --mode=development --watch",
