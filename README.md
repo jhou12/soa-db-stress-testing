@@ -1,6 +1,6 @@
 # Amazon-Styled SOA Photos Module Database
 
-Database that I built to persist and serve data to a previously built Service-Oriented Architecture frontend modeled from the Amazon Photos service. The database seeds and persists data for 10 million unique product IDs, and can be deployed via Amazon EC2. Built with Express, Node, and PostgreSQL.
+Database that I built to persist and serve data to a previously built Service-Oriented Architecture frontend modeled from the Amazon Photos service. The database seeds and persists data for 10 million unique product IDs, and can be deployed via Amazon EC2. Built with Express, Node, and PostgreSQL, tested with New Relic, Loader.io, and Artillery, and optimized with Redis.
 
 <p align="center">
 <img src="screenshot.png" width="600"/>
