@@ -20,10 +20,10 @@ var corsOptions = {
 };
 
 app.get('/photos/id/:productId', (req, res) => {
-  // let productId = req.params.productId;
-  let id = req.params.productId;
-  // dbQuery.getAllProductPhotos(productId)
-  axios(`http://3.20.63.46:4002/photos/id/${id}`)
+  // let productId = req.params.productId; // use for requests to localhost!
+  // dbQuery.getAllProductPhotos(productId) // use for requests to localhost!
+  let id = req.params.productId; // use for requests to EC2!
+  axios(`http://3.20.63.46:4002/photos/id/${id}`) // use for requests to EC2!
     .then(productPhotoUrls => {
       if (!productPhotoUrls) {
         res.status(404).send('Invalid product id');
