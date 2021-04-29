@@ -43,7 +43,7 @@ nvm install node
 1. log into super user with `sudo su`, create root directory for csv files, and allow write access to directory with `chmod 777 [csv directory]`
 1. copy csvs from local to EC2 directory, from local terminal: `scp -i "[pem key]" [absolute path]/*.csv ubuntu@[Public IPv4 DNS]:/[EC2 csv directory absolute path]`
 1. log into the Postgres user with `sudo -u postgres psql` and save each csv into the db with `COPY "AllUrls" FROM '/[csv directory]/[file].csv' WITH DELIMITER ',' CSV HEADER;`
-1. after saving all csv data to db, delete csv files to free up memory with `sudo su` and `rm -R [csv dir]`
+1. after saving all csv data to db, delete csv files to free up memory with `sudo su` and then `rm -R [csv dir]`
 1. index database entries by logging into pg user with `sudo -u postgres psql` and using `CREATE INDEX "primaryQuery" ON "AllUrls"("assocId");`
 1. change Postgres config to allow queries from external requests by finding config file using `sudo -u postgres psql -c 'SHOW config_file'` and for `pg_hba.conf` add last line `host all all 0.0.0.0/0 md5` and in `postgresql.conf` change `listen_addresses` to `*`
 
@@ -53,12 +53,12 @@ nvm install node
 1. start server with `node server/index_service.js` (for service) or `node server/index_db.js` (for database)
 1. verify app up and running at url `http://[Public IPv4 DNS]:4002/:id` (for id values 1,000-10,001,000).
 NOTE: must use `http`, not `https`, or will return error
-1. to run stress test locally, install New Relic: create a free account on `newrelic.com`, and [install New Relic for Node](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent/) by installing New Relic dependency, downloading the newrelic.js config file in root, and requiring it in the server
-1. to run stress test locally by installing Artillery with `npm install -g artillery@1.6`, generate the test ids csv file with `node stressTest/writeTestIds.js`, and using `artillery run stressTest/reqTest.yml`
-1. to run stress test in the cloud, [install Loader.io](https://loader.io/) by signing up for a free account, adding a token to root, and running a test.
+1. for local stress testing data visualization, install New Relic: create a free account on `newrelic.com`, and [install New Relic for Node](https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/install-nodejs-agent/) by installing New Relic dependency, downloading the newrelic.js config file in root, and requiring it in the server
+1. to run stress test locally, install Artillery with `npm install -g artillery@1.6`, generate the test ids csv file with `node stressTest/writeTestIds.js`, and use `artillery run stressTest/reqTest.yml`
+1. to run stress test in cloud, [install Loader.io](https://loader.io/) by signing up for a free account, adding a token to root, and running a test
 1. to stop instance, go to instance page and click Instance State > Stop Instance.
 
 ## Setup with Proxy
 
-Complete local or EC2 setup, and follow setup instructions for [proxy](https://github.com/jhou12/soa-db-stress-testing-proxy).
+Complete local or EC2 setup above, and follow setup instructions for [proxy](https://github.com/jhou12/soa-db-stress-testing-proxy).
 
