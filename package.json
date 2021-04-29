@@ -8,13 +8,11 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "seed": "node populate.js",
     "couch": "node populateCouch.js",
-    "deleteCouch": "node deleteCouch.js",
     "pg": "node populatePg.js",
     "start": "node ./server/index.js",
-    "react-dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
+    "react-dev": "webpack --mode=development --watch",
     "deploy": "./deploy.sh",
     "test": "mocha --file test/setup.js --exit"
   },
@@ -30,7 +28,6 @@
     "nano": "^9.0.3",
     "newrelic": "^7.3.0",
     "pg": "^8.5.1",
-    "pg-copy-streams": "^5.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "redis": "^3.1.2",
@@ -49,7 +46,6 @@
     "babel-plugin-styled-components": "^1.12.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "mocha": "^8.2.1",
     "mocha-suppress-logs": "^0.2.0",
     "nodemon": "^2.0.7",

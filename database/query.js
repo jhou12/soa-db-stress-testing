@@ -10,7 +10,6 @@ const getProductPrimaryPhoto = async (id) => {
 
 const getAllProductPhotos = async (id) => {
   let productPhotos = await db.Photo.findOne({id: id}).select('primaryUrl productUrls');
-  console.log('db test', productPhotos)
   return productPhotos;
 }
 

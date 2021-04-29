@@ -1,13 +1,10 @@
-// VERSION 4: ISOLATED SAVE FUNCTION INTO SEPARATE FILE. WRITE FUNCTION OUTPUTS CSV FILES CORRECTLY BUT SAVE FUNCTION DOESN'T SEED WITHOUT PRIMARY INDEXES. ADDED PRIMARY INDEXES IN ON EXTRACTION STEP.
-
 const axios = require('axios')
 const fs = require('fs');
 const fastcsv = require('fast-csv');
 
 // ****** CSV WRITE FUNCTIONS ******
 
-let BATCHSIZE = 200000 // 200000
-// let BATCHLOOPS = 2
+let BATCHSIZE = 250000 // 250000 NEW MAX
 let BATCHLOOPS = 10000000 / BATCHSIZE
 let PRIMARY_ID = 0
 let ASSOC_ID = 1000
@@ -22,46 +19,18 @@ const makeIdArray = async () => {
       return `https://picsum.photos/${size[0]}/${size[1]}/?image=${availableIds[randomIdIndex].id}`
     })
 
-    let idGroupEntries = []
-
-    let primaryEntry = {
-      assocId: ASSOC_ID,
-      type: 'primary',
-      url: urlArray[0]
-    }
-    idGroupEntries.push(primaryEntry)
-
-    urlArray.forEach(url => {
+    let idGroupEntries = urlArray.map(url => {
        let featuresEntry = {
          assocId: ASSOC_ID,
-         type: 'features',
          url: url
        }
-       idGroupEntries.push(featuresEntry)
+       return featuresEntry
     })
 
-    urlArray.slice(0,7).forEach(url => {
-      let productArray = {
-        assocId: ASSOC_ID,
-        type: 'product',
-        url: url
-      }
-      idGroupEntries.push(productArray)
-    })
     return idGroupEntries
   } catch(e) {
     console.log(e)
   }
-}
-
-let log1000 = (num) => {
-  let numArr = num.toString().split('').reverse()
-  for (let i = 1; i <= numArr.length - 1; i++) {
-    if (i % 3 === 0) {
-      numArr[i] = numArr[i] + ','
-    }
-  }
-  return numArr.reverse().join('')
 }
 
 let makeBatches = async () => {
@@ -71,10 +40,6 @@ let makeBatches = async () => {
     let dataArray = []
     for (let i = 0; i < BATCHSIZE; i++) {
       let entry = await makeIdArray()
-      // if (i % 100000 === 0 || i === BATCHSIZE - 1) {
-      //   let entries = log1000(ASSOC_ID)
-      //   console.log(`finished batch ${i} at ${i/BATCHSIZE * 100}%, entry ${entries}`)
-      // }
       dataArray.push(entry)
       ASSOC_ID++
     }
@@ -90,7 +55,7 @@ let extractCSV = async () => {
     let dataStringArray = []
     data.forEach(idGroup => {
       idGroup.forEach(row => {
-        dataStringArray.push(`${PRIMARY_ID},${row.assocId},${row.type},${row.url}`)
+        dataStringArray.push(`${PRIMARY_ID},${row.assocId},${row.url}`)
         PRIMARY_ID++
       });
     })

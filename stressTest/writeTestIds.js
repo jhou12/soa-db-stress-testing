@@ -6,7 +6,6 @@ const extractCSV = () => {
   for (let i = 10000000; i < 10001000; i++) {
     csvVals.push(i)
   }
-  // console.log(csvVals.length, csvVals[0], csvVals[csvVals.length - 1])
   const csvString = csvVals.join('\n')
   return csvString
 }

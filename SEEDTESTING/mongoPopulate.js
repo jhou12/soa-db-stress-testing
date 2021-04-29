@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const faker = require('faker');
 const getPhotos = require('./data/getPhotoUrls.js');
 
-// Orig seeding max: 250,000
 let SEEDING = 5
 
 const populateDb = () => {

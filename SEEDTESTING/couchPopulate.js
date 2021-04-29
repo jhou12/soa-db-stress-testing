@@ -4,8 +4,8 @@ const axios = require('axios')
 
 let NANO_DB = 'test'
 let ID_START = 0
-let BATCHSIZE = 1000 // default: 1000
-let BATCHLOOPS = 10000 // default: 10000
+let BATCHSIZE = 1000
+let BATCHLOOPS = 10000000 / BATCHSIZE
 const nanodb = nano.use(NANO_DB)
 let featuresPhotoSizes = [[960, 832], [960, 400], [960, 123], [960, 832], [700, 568], [700, 568], [700, 568], [960, 832], [547, 454], [300, 270], [300, 270], [300, 270], [50, 50], [50, 50], [50, 50], [50, 50], [50, 50]];
 let availableIds;
@@ -19,8 +19,6 @@ const makeEntry = async () => {
 
     let entry = {
       id: ID_START + 1000,
-      primaryUrl: urlArray[0],
-      productUrls: urlArray.slice(0, 7),
       featuresUrls: urlArray
     }
     return entry
@@ -34,7 +32,7 @@ let makeDataArray = async () => {
     let arr = []
     for (let i = 0; i < BATCHSIZE; i++) {
       let entry = await makeEntry()
-      arr.push(entry) // INSERT DATA TEST HERE
+      arr.push(entry)
       ID_START++
     }
     return arr
@@ -74,7 +72,7 @@ let loopBatch = async () => {
       await insertArray(dataToInsert)
       if (i % 200 === 0 || i === BATCHLOOPS - 1) {
         let entries = log1000(ID_START)
-        console.log(`finished batch ${i}, entry ${entries}`)
+        console.log(`finished batch ${i}/${BATCHLOOPS}, entry ${entries}`)
       }
     }
   } catch(e) {

@@ -55,7 +55,6 @@ app.get('/photos/id/:productId', async (req, res) => {
   // axios(`http://3.20.63.46:4002/photos/id/${id}`)
   // // dbQuery.getAllProductPhotos(productId)
   //   .then(productPhotoUrls => {
-  //     console.log('photos reg test', productPhotoUrls.data)
   //     if (!productPhotoUrls) {
   //       res.status(404).send('Invalid product id');
   //     } else {
